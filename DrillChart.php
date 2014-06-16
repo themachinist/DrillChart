@@ -27,8 +27,8 @@
  * Can't really see an ROI for doing it that way.
  */
 if ($_GET['data']) {
-	$csv = 'DrillChart.csv';
-	$array = array_map(str_getcsv, explode("\n", $csv));
+	$csv = file_get_contents('DrillChart.csv');
+	$array = array_map("str_getcsv", explode("\n", $csv));
 	echo json_encode($array);
 	exit(1);
 }
