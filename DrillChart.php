@@ -27,10 +27,9 @@
  * Can't really see an ROI for doing it that way.
  */
 if ($_GET['data']) {
-	require('DrillChart.body.php');
-	$body = new SpecialDrillChart();
-	echo 'hi';
-	echo $body->parseChartDatabase();
+	$csv = 'DrillChart.csv';
+	$array = array_map("str_getcsv", explode("\n", $csv));
+	echo json_encode($array);
 	exit(1);
 }
 

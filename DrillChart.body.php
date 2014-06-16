@@ -53,11 +53,4 @@ class SpecialDrillChart extends SpecialPage {
 		'remoteExtPath' => 'DrillChart'
 		);
 	}
-
-	function parseChartDatabase() {
-		echo 'hi';
-		$csv = 'DrillChart.csv';
-		$array = array_map("str_getcsv", explode("\n", $csv));
-		return json_encode($array);
-	}
 }
