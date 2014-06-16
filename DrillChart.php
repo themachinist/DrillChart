@@ -28,7 +28,7 @@
  */
 if ($_GET['data']) {
 	$csv = 'DrillChart.csv';
-	$array = array_map("str_getcsv", explode("\n", $csv));
+	$array = array_map(str_getcsv, explode("\n", $csv));
 	echo json_encode($array);
 	exit(1);
 }
