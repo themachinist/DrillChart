@@ -26,9 +26,10 @@
  * but I really don't care about this non-production extension adhering to MW standards
  * Can't really see an ROI for doing it that way.
  */
-if ($_GET['data'] == 1) {
+if ($_GET['data']) {
 	require('DrillChart.body.php');
 	$body = new SpecialDrillChart();
+	echo 'hi';
 	echo $body->parseChartDatabase();
 	exit(1);
 }
