@@ -28,7 +28,7 @@
  */
 if ($_GET['data'] == 1) {
 	require('DrillChart.body.php');
-	$body = new DrillChart();
+	$body = new SpecialDrillChart();
 	echo $body->parseChartDatabase();
 	exit(1);
 }
