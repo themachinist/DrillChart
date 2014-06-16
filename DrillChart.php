@@ -34,11 +34,11 @@ if ($_GET['data']) {
 }
 
 # credits
-$wgExtensionCredits['ext.flexigrid'][] = array(
+$wgExtensionCredits['DrillChart'][] = array(
     'path' => __FILE__,
-    'name' => 'Flexigrid Extension',
+    'name' => 'Drill Chart Extension',
     'author' => 'David Winslow @the_machinist_', 
-    'url' => 'https://www.mediawiki.org/wiki/Extension:Flexigrid', 
+    'url' => 'https://www.mediawiki.org/wiki/Extension:DrillChart', 
     'description' => 'Add Flexigrid support to mediawiki tables',
     'version'  => 0,
     'license-name' => "n/a",
