@@ -35,7 +35,7 @@ class SpecialDrillChart extends SpecialPage {
 	}
 
 	function execute( $par ) {
-		$wgSpecialPageGroups[ 'DrillChart' ] => 'specialpages-group-chartstoolsandcalculators';
+		$wgSpecialPageGroups[ 'DrillChart' ] = 'specialpages-group-chartstoolsandcalculators';
 		$this->addResourceModules();
 
 		$request = $this->getRequest();
