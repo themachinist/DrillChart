@@ -43,6 +43,11 @@ $wgExtensionCredits['DrillChart'][] = array(
     'version'  => 0,
     'license-name' => "n/a",
 );
+$wgResourceModules['ext.DrillChart'] = array(
+	'scripts' => 'ext.DrillChart.js',
+	'localBasePath' => __DIR__,
+	'remoteExtPath' => 'DrillChart'
+);
 $dir = __DIR__ . '/';
 $wgAutoloadClasses['SpecialDrillChart'] = $dir . 'DrillChart.body.php'; # Tell MediaWiki to load the extension body.
 $wgExtensionMessagesFiles['DrillChart'] = $dir . 'DrillChart.i18n.php'; # Load internationalization file

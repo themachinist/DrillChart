@@ -18,7 +18,7 @@
  *
  * @file
  * @ingroup Extensions
- * @author Evan Prodromou <evan@vinismo.com>
+ * @author David Winslow <the@machini.st>
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {
@@ -39,18 +39,8 @@ class SpecialDrillChart extends SpecialPage {
 		$request = $this->getRequest();
 		$output = $this->getOutput();
 
-		$this->addResourceModules();
 		$output->addModules( array( 'flexigrid', 'ext.DrillChart' ) );
 		$this->setHeaders();
 		$output->addWikiText( '<table class="flexigrid"></table>' );
-	}
-
-	function addResourceModules() {
-		global $wgResourceModules;
-		$wgResourceModules['ext.DrillChart'] = array(
-		'scripts' => 'ext.DrillChart.js',
-		'localBasePath' => __DIR__,
-		'remoteExtPath' => 'DrillChart'
-		);
 	}
 }
