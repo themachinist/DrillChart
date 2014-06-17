@@ -46,7 +46,8 @@ $wgExtensionCredits['DrillChart'][] = array(
 $wgResourceModules['ext.DrillChart'] = array(
 	'scripts' => 'ext.DrillChart.js',
 	'localBasePath' => __DIR__,
-	'remoteExtPath' => 'DrillChart'
+	'remoteExtPath' => 'DrillChart',
+	'position' => 'top'
 );
 $dir = __DIR__ . '/';
 $wgAutoloadClasses['SpecialDrillChart'] = $dir . 'DrillChart.body.php'; # Tell MediaWiki to load the extension body.
