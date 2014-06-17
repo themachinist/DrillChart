@@ -46,9 +46,11 @@ class SpecialDrillChart extends SpecialPage {
 	}
 
 	function addResourceModules() {
+		var_dump($wgResourceModules);
 		$wgResourceModules['ext.DrillChart'] = array(
 		'scripts' => 'ext.DrillChart.js',
-		'localBasePath' => __DIR__
+		'localBasePath' => __DIR__,
+		'remoteExtPath' => 'DrillChart'
 		);
 	}
 }
