@@ -36,19 +36,18 @@ class SpecialDrillChart extends SpecialPage {
 
 	function execute( $par ) {
 		$wgSpecialPageGroups[ 'DrillChart' ] = 'specialpages-group-chartstoolsandcalculators';
-		$this->addResourceModules();
-
 		$request = $this->getRequest();
 		$output = $this->getOutput();
 
+		$this->addResourceModules();
 		$output->addModules( array( 'flexigrid', 'ext.DrillChart' ) );
 		$this->setHeaders();
-		$output->addWikiText( '<noscript>You must enable javascript to use this page.</noscript><table class="flexigrid"></table>' );
+		$output->addWikiText( '<table class="flexigrid"></table>' );
 	}
 
 	function addResourceModules() {
 		$wgResourceModules['ext.DrillChart'] = array(
-		'scripts' => array( 'js/ext.DrillChart.js' ),
+		'scripts' => array( 'ext.DrillChart.js' ),
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => 'DrillChart'
 		);
