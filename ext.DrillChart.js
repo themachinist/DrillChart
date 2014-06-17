@@ -1,7 +1,7 @@
 $( document ).ready(function() {
 	mw.loader.using( ['flexigrid'], function () {
 		$('.flexigrid').flexigrid({
-			url: 'DrillChart.php?data=1',
+			url: 'extensions/DrillChart/DrillChart.php?data=1',
 			dataType: 'json',
 			colModel : [
 			{display: 'Imperial', name : 'imperial', width : 80, sortable : true, align: 'right'},
