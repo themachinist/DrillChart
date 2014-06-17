@@ -1,7 +1,5 @@
 mw.loader.using( 'jquery', function(){
 	mw.loader.using( 'flexigrid', function(){
-		alert('ready!');
-		alert($().flexigrid.toString());
 		$('.flexigrid').flexigrid({
 			url: 'extensions/DrillChart/DrillChart.php?data=1',
 			dataType: 'json',
