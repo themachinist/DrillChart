@@ -46,7 +46,7 @@ class SpecialDrillChart extends SpecialPage {
 	}
 
 	function addResourceModules() {
-		var_dump($wgResourceModules);
+		global $wgResourceModules;
 		$wgResourceModules['ext.DrillChart'] = array(
 		'scripts' => 'ext.DrillChart.js',
 		'localBasePath' => __DIR__,
