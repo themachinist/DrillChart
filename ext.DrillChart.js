@@ -25,7 +25,7 @@ $( document ).ready(function() {
 			rp: 15,
 			showTableToggleBtn: true,
 			width: 700,
-			height: 200
+			height: 600
 		});
 	});
 });
