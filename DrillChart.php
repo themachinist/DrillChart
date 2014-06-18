@@ -69,7 +69,7 @@ if ($_GET['data']) {
 		$id++;
 	}
 	header('Content-type: application/json');	
-	echo json_encode($data);
+	var_dump($data);
 	exit(1);
 }
 
