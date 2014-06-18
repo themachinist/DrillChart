@@ -51,9 +51,9 @@ $wgResourceModules['ext.DrillChart'] = array(
 );
 $wgResourceModules['flexigrid'] = array(
 	'scripts' => 'flexigrid.js',
-	'localBasePath' => "$IP/resources/Flexigrid/js/",
-	'remoteExtPath' => 'resources/Flexigrid/js/',
-	'styles' => array('resources/Flexigrid/css/flexigrid.css' => array( 'media' => 'screen' ) )
+	'localBasePath' => "Flexigrid/js",
+	'remoteExtPath' => 'Flexigrid/js',
+	'styles' => array('Flexigrid/css/flexigrid.css' => array( 'media' => 'screen' ) )
 );
 
 $dir = __DIR__ . '/';
