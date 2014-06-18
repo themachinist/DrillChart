@@ -58,7 +58,7 @@ if ($_GET['data']) {
 	}
 	$data = array();
 	$data['page'] = $page;
-	$data['total'] = $total;
+	
 	$csv = file_get_contents('TapDrill_Chart.csv');
 	$lines = explode("\n",$csv);
 	$id = 1;
@@ -74,6 +74,7 @@ if ($_GET['data']) {
 		);
 		$id++;
 	}
+	$data['total'] = $id;
 	header('Content-type: application/json');	
 	echo json_encode($data);
 	exit(1);
