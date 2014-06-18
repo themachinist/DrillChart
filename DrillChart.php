@@ -32,7 +32,7 @@ function trimlastchar($s){
 	return substr($s, 0, -1);
 }
 
-if ($_GET['data']) {
+/*if ($_GET['data']) {
 	$str = "";
 	$csv = file_get_contents('TapDrill_Chart.csv');
 	$lines = explode("\n",$csv);
@@ -49,6 +49,27 @@ if ($_GET['data']) {
 	}	
 	header('Content-type: application/json');	
 	print "{\"rows\": [" . trimlastchar(trimlastchar($str)) . "]}";
+	exit(1);
+}*/
+
+if ($_GET['data']) {
+	$str = "";
+	$csv = file_get_contents('TapDrill_Chart.csv');
+	$lines = explode("\n",$csv);
+	$id = 1;
+	foreach ($lines as $ln){
+		$fields = explode(',', $ln);
+		foreach ($fields as $field){
+			$cell_array[] = $field;
+		}
+		$data['rows'][] = array(
+		'id' => $id,
+		'cell' => $cell_array
+		);
+		$id++;
+	}
+	header('Content-type: application/json');	
+	echo json_encode($data);
 	exit(1);
 }
 

@@ -31,7 +31,7 @@ mw.loader.using( 'jquery', function(){
 			rp: 15,
 			showTableToggleBtn: true,
 			width: 700,
-			height: 600
+			height: 400
 		});
 	});
 });
