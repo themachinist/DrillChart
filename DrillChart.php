@@ -49,12 +49,13 @@ $wgResourceModules['ext.DrillChart'] = array(
 	'remoteExtPath' => 'DrillChart',
 	'position' => 'top'
 );
-$wgResourcesModules['flexigrid'] = array(
+$wgResourceModules['flexigrid'] = array(
 	'scripts' => 'flexigrid.js',
 	'localBasePath' => "$IP/resources/Flexigrid/js/",
 	'remoteExtPath' => 'resources/Flexigrid/js/',
 	'styles' => array('resources/Flexigrid/css/flexigrid.css' => array( 'media' => 'screen' ) )
 );
+
 $dir = __DIR__ . '/';
 $wgAutoloadClasses['SpecialDrillChart'] = $dir . 'DrillChart.body.php'; # Tell MediaWiki to load the extension body.
 $wgExtensionMessagesFiles['DrillChart'] = $dir . 'DrillChart.i18n.php'; # Load internationalization file
