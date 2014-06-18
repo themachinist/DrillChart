@@ -76,7 +76,7 @@ if ($_GET['data']) {
 		);
 		$id++;
 	}
-	unset($data['rows'][1]);
+	unset($data['rows'][0]);
 	$data['total'] = $id;
 	header('Content-type: application/json');	
 	echo json_encode($data);
