@@ -1,6 +1,6 @@
 mw.loader.using( 'jquery', function(){
 	mw.loader.using( 'flexigrid', function(){
-		$('.flexigrid').flexigrid(/*{
+		$('.flexigrid').flexigrid({
 			url: 'extensions/DrillChart/DrillChart.php?data=1',
 			dataType: 'json',
 			colModel : [
@@ -26,7 +26,7 @@ mw.loader.using( 'jquery', function(){
 			showTableToggleBtn: true,
 			width: 700,
 			height: 600
-		}*/);
+		});
 	});
 });
 
