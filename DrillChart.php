@@ -53,7 +53,12 @@ function trimlastchar($s){
 }*/
 
 if ($_GET['data']) {
-	$str = "";
+	if (isset($_POST['page'])) {
+		$page = mysql_real_escape_string($_POST['page']);
+	}
+	$data = array();
+	$data['page'] = $page;
+	$data['total'] = $total;
 	$csv = file_get_contents('TapDrill_Chart.csv');
 	$lines = explode("\n",$csv);
 	$id = 1;
