@@ -9,6 +9,9 @@ mw.loader.using( 'jquery', function(){
 			onSuccess:function(){
                 console.log('successfully loaded data');
             },
+            onError: function(data){
+			    console.log('something is wrong');
+			},
 			colModel : [
 			{display: 'Imperial', name : 'imperial', width : 80, sortable : true, align: 'right'},
 			{display: 'Wire', name : 'wire', width : 80, sortable : true, align: 'right'},
