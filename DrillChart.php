@@ -59,6 +59,7 @@ if ($_GET['data']) {
 	$id = 1;
 	foreach ($lines as $ln){
 		$fields = explode(',', $ln);
+		unset($cell_array);
 		foreach ($fields as $field){
 			$cell_array[] = $field;
 		}
