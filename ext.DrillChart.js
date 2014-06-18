@@ -11,7 +11,7 @@ mw.loader.using( 'jquery', function(){
             },
             onError: function(data){
 			    console.log('something is wrong');
-			    console.log('data');
+			    console.log(data);
 			},
 			colModel : [
 			{display: 'Imperial', name : 'imperial', width : 80, sortable : true, align: 'right'},

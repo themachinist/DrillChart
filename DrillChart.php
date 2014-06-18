@@ -53,8 +53,8 @@ function trimlastchar($s){
 }*/
 
 if ($_GET['data']) {
-	if (isset($_POST['page'])) {
-		$page = mysql_real_escape_string($_POST['page']);
+	if (isset($_POST['page']) && is_int($_POST['page']) ) {
+		$page = $_POST['page'];
 	} else {
 		$page = 1;
 	}
