@@ -28,7 +28,9 @@
  */
 if ($_GET['data']) {
 	$csv = file_get_contents('TapDrill_Chart.csv');
-	$array = array_map("str_getcsv", explode("\n", $csv));
+	$array = array_map(function($s){
+		return json_encode(str_getcsv($d));
+	}, explode("\n", $csv));
 	echo json_encode($array);
 	exit(1);
 }
