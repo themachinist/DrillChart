@@ -33,6 +33,7 @@ mw.loader.using( 'jquery', function(){
 			width: 700,
 			height: 400
 		});
+		console.log('after flexigrid call');
 	});
 });
 
