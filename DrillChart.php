@@ -55,6 +55,8 @@ function trimlastchar($s){
 if ($_GET['data']) {
 	if (isset($_POST['page'])) {
 		$page = mysql_real_escape_string($_POST['page']);
+	} else {
+		$page = 1;
 	}
 	$data = array();
 	$data['page'] = $page;
