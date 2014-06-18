@@ -25,13 +25,30 @@
 /** I know that I am not supposed to do any of the crap that follows this comment
  * but I really don't care about this non-production extension adhering to MW standards
  * Can't really see an ROI for doing it that way.
+ * and phew i just turned this really dirty. evander holyfield
  */
+
+function trimlastchar($s){
+	return substr($s, 0, -1);
+}
+
 if ($_GET['data']) {
+	$str = "";
 	$csv = file_get_contents('TapDrill_Chart.csv');
-	$array = array_map(function($s){
-		return json_encode(str_getcsv($d));
-	}, explode("\n", $csv));
-	echo json_encode($array);
+	$lines = explode("\n",$csv);
+	$id = 1;
+	foreach ($lines as $ln){
+		$fields = explode(',', $ln);
+		$ln = "";
+		foreach ($fields as $field){
+			$ln .= "\"$field\",";
+		}
+		$str = $str . "{\"id\": \"$id\",";
+		$str = $str . "\"cell\":[" . trimlastchar($ln) . "]},\n";
+		$id++;
+	}	
+	header('Content-type: application/json');	
+	print "{\"rows\": [" . trimlastchar(trimlastchar($str)) . "]}";
 	exit(1);
 }
 

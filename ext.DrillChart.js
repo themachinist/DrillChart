@@ -5,6 +5,10 @@ mw.loader.using( 'jquery', function(){
 		$('.flexigrid').flexigrid({
 			url: 'extensions/DrillChart/DrillChart.php?data=1',
 			dataType: 'json',
+			procmsg: 'Processing, Please wait ...',
+			onSuccess:function(){
+                console.log('successfully loaded data');
+            }
 			colModel : [
 			{display: 'Imperial', name : 'imperial', width : 80, sortable : true, align: 'right'},
 			{display: 'Wire', name : 'wire', width : 80, sortable : true, align: 'right'},
@@ -21,7 +25,7 @@ mw.loader.using( 'jquery', function(){
 			],
 			sortname: "imperial",
 			sortorder: "asc",
-			usepager: false,
+			usepager: true,
 			title: 'Drill and Tap-Drill Sizes',
 			useRp: false,
 			rp: 15,
