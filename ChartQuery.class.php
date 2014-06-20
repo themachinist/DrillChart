@@ -78,7 +78,7 @@ class ChartQuery {
 	 */
 	function process(){
 		switch($this->queryType){
-			case :
+			case 'json':
 				viewPage($this->pageNumber, $this->rowsPerPage)->sortBy($this->model->column($sortname), $sorttype);
 				break;
 		}
