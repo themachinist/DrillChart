@@ -1,4 +1,6 @@
 <?php
+require('ChartModel.class.php');
+
 class ChartQuery {
 	private $model;
 	private $view = array();
