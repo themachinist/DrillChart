@@ -1,6 +1,7 @@
 <?php
 class ChartModel {
 	private $data = array();
+	private $columns = array();
 
 	function __construct($file){
 		// not sure if i like this - president not sure
@@ -33,7 +34,16 @@ class ChartModel {
 			);
 			$id++;
 		}
+		$this->columns = $this->rows[0]['cell'];
 		unset($this->rows[0]);
+	}
+
+	function column($str){
+		if (!array_key_exists($this->columns, $str)){
+			throw new Exception('column to sort by does not exist');
+			return false;
+		}
+		return $this->columns[$str];
 	}
 
 	static function isCSV($csv) {

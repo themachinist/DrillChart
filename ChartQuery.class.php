@@ -84,8 +84,19 @@ class ChartQuery {
 				viewPage($this->pageNumber, $this->rowsPerPage)->sortBy($this->model->column($sortname), $sorttype);
 				break;
 		}
-		$this->viewPage($this->pageNumber, $this->rowsPerPage)
+		try {
+			$this->viewPage($this->pageNumber, $this->rowsPerPage)
 				->sortBy($this->model->column($sortname), $sorttype);
+		} catch (Exception $e) {
+			if ($e instanceof SortException) {
+				return
+			}
+			$this->view['page'] = 1
+			$this->view['rows'] = array('id' => '1', 
+										'cell' => array($e.message())
+										);
+			$this->view['total'] = 1
+		}
 		return json_encode($this->view);
 	}
 }
