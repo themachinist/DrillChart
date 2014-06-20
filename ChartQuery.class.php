@@ -10,7 +10,7 @@ class ChartQuery {
 	 * 
 	 */
 	function __construct($page, $rp, $sortname, $sorttype, $qtype, $query){
-		$this->model = new ChartModel();
+		$this->model = new ChartModel('TapDrill_Chart.csv');
 		$this->pageNumber = $page;
 		$this->rowsPerPage = $rp;
 		$this->sortByColumn = $sortname;
