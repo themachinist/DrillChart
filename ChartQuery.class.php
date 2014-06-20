@@ -53,7 +53,7 @@ class ChartQuery {
 		$this->view['rows_prev_tmp'] = $this->view->previous['rows'];
 		$this->view->previous['rows'] = $this->view['rows'];
 		$this->view['rows'] = $this->view->previous['rows'];
-		unset $this->view['rows_prev_tmp'];
+		unset($this->view['rows_prev_tmp']);
 		return $this;
 	}
 
