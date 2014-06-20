@@ -1,6 +1,6 @@
 <?php
 class ChartModel {
-	$data = array();
+	private $data = array();
 
 	function __construct($file){
 		// not sure if i like this - president not sure
