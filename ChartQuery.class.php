@@ -91,11 +91,11 @@ class ChartQuery {
 			if ($e instanceof SortException) {
 				return;
 			}
-			$this->view['page'] = 1
+			$this->view['page'] = 1;
 			$this->view['rows'] = array('id' => '1', 
 										'cell' => array($e.message())
 										);
-			$this->view['total'] = 1
+			$this->view['total'] = 1;
 		}
 		return json_encode($this->view);
 	}
