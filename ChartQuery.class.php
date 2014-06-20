@@ -89,7 +89,7 @@ class ChartQuery {
 				->sortBy($this->model->column($sortname), $sorttype);
 		} catch (Exception $e) {
 			if ($e instanceof SortException) {
-				return
+				return;
 			}
 			$this->view['page'] = 1
 			$this->view['rows'] = array('id' => '1', 
