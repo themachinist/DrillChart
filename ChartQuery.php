@@ -1,4 +1,5 @@
 <?php
+require('ChartQuery.class.php');
 $query = new ChartQuery(
 	$_POST['page'],
 	$_POST['rp'],

@@ -2,6 +2,7 @@
 class ChartQuery {
 	$model = new ChartModel();
 	$view = array();
+	$previous = array();
 
 	/**
 	 * 
@@ -12,27 +13,18 @@ class ChartQuery {
 		$this->sortByColumn = $sortname;
 		$this->sortDirection = $sorttype;
 		$this->query = $query;
-		$this->queryType = $qtype;
+		$this->queryType = $qtype; 
+		// fluent-ish interface $which->is()->really('cool');
+		return $this;
 	}
 
-	function viewPage($pn, $rpp){
-		$start = (($pn - 1) * $rpp);
-		$end = $start + $rpp;
-		$this->view['page'] = $pn;
-		$this->view['rows'] = array_slice($this->model->rows, $start, $end);
-		$this->view['total'] = count($this->view['rows']);
-		return $view;
+	function search($term){
+		$this->view['rows'] = array_search($term, $this->view['rows']);
+		return $this;
 	}
 
-	function viewAll(){
-		
-	}
-
-	function (){
-		viewPage($this->pageNumber, $this->rowsPerPage)->sortBy($this->model->column($sortname), $sorttype);
-	}
-
-	function sortBy($data, $column, $dir){
+	function sortBy($column, $dir){
+		$data = $this->view['rows'];
 		// correct value for array_multisort
 		if ($dir){
 			$dir = SORT_ASC;
@@ -52,14 +44,43 @@ class ChartQuery {
 
 		// replace row data
 		$this->view['rows'] = $data;
+
+		return $this;
 	}
 
-	function 
+	function revert(){
+		$this->view['rows_prev_tmp'] = $this->view->previous['rows'];
+		$this->view->previous['rows'] = $this->view['rows'];
+		$this->view['rows'] = $this->view->previous['rows'];
+		unset $this->view['rows_prev_tmp'];
+		return $this;
+	}
+
+	function viewPage($pn, $rpp){
+		$start = (($pn - 1) * $rpp);
+		$end = $start + $rpp;
+		$this->view['page'] = $pn;
+		$this->view['rows'] = array_slice($this->model->rows, $start, $end);
+		$this->view['total'] = count($this->view['rows']);
+		return $this;
+	}
+
+	function viewAll(){
+		$this->view['page'] = $pn;
+		$this->view['rows'] = array_slice($this->model->rows, $start, $end);
+		$this->view['total'] = count($this->view['rows']);
+		return $this;
+	}
 
 	/**
 	 * Main entry point for the class
 	 */
 	function process(){
+		switch($this->queryType){
+			case :
+				viewPage($this->pageNumber, $this->rowsPerPage)->sortBy($this->model->column($sortname), $sorttype);
+				break;
+		}
 		return json_encode($this->view);
 	}
 }
