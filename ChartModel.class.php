@@ -14,12 +14,11 @@ class ChartModel {
 			throw new Exception('Error trying to read csv file using ChartModel. Verify file exists and check permissions.');
 		}
 
-		$this->readCSV($file);
+		$this->readCSV();
 	}
 
-	function readCSV($file){
-		$csv = file_get_contents($file);
-		$lines = explode("\n",$csv);
+	function readCSV(){
+		$lines = explode("\n",$this->csv);
 		$id = 1;
 		foreach ($lines as $ln){
 			$fields = explode(',', $ln);
