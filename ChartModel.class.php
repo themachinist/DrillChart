@@ -9,9 +9,9 @@ class ChartModel {
 		}
 		// arbitrary comment
 		$this->csv = file_get_contents($file);
-		echo $this->csv;
+
 		// kind of need some data
-		if ($this->csv !== false || is_string($this->csv)){
+		if (is_string($this->csv)){
 			throw new Exception('Error trying to read csv file using ChartModel. Verify file exists and check permissions.');
 		}
 
