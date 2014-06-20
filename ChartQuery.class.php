@@ -97,6 +97,9 @@ class ChartQuery {
 										);
 			$this->view['total'] = 1;
 		}
+		print("<pre>");
+		var_dump($this->view);
+		print("</pre>");
 		return json_encode($this->view);
 	}
 }
