@@ -1,13 +1,14 @@
 <?php
 class ChartQuery {
-	$model = new ChartModel();
-	$view = array();
-	$previous = array();
+	private $model;
+	private $view = array();
+	private $previous = array();
 
 	/**
 	 * 
 	 */
 	function __construct($page, $rp, $sortname, $sorttype, $qtype, $query){
+		$this->model = new ChartModel();
 		$this->pageNumber = $page;
 		$this->rowsPerPage = $rp;
 		$this->sortByColumn = $sortname;
