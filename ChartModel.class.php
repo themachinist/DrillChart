@@ -13,10 +13,12 @@ class ChartModel {
 		if ($this->csv !== false){
 			throw new Exception('Error trying to read csv file using ChartModel. Verify file exists and check permissions.');
 		}
+
+		$this->readCSV($file);
 	}
 
-	function readCSV(){
-		$csv = file_get_contents('TapDrill_Chart.csv');
+	function readCSV($file){
+		$csv = file_get_contents($file);
 		$lines = explode("\n",$csv);
 		$id = 1;
 		foreach ($lines as $ln){
@@ -25,21 +27,21 @@ class ChartModel {
 			foreach ($fields as $field){
 				$cell_array[] = $field;
 			}
-			$data['rows'][] = array(
+			$this->rows[] = array(
 			'id' => $id,
 			'cell' => $cell_array
 			);
 			$id++;
 		}
-		unset($data['rows'][0]);
+		unset($this->rows[0]);
 	}
 
 	static function isCSV($csv) {
-
+		return true;
 	}
 }
 
-if ($_GET['data']) {
+/**if ($_GET['data']) {
 	if (isset($_POST['page']) && is_int($_POST['page']) ) {
 		$page = $_POST['page'];
 	} else {
@@ -68,5 +70,5 @@ if ($_GET['data']) {
 	header('Content-type: application/json');	
 	echo json_encode($data);
 	exit(1);
-}
+}*/
 ?>

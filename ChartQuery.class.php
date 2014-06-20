@@ -84,6 +84,8 @@ class ChartQuery {
 				viewPage($this->pageNumber, $this->rowsPerPage)->sortBy($this->model->column($sortname), $sorttype);
 				break;
 		}
+		viewPage($this->pageNumber, $this->rowsPerPage)
+				->sortBy($this->model->column($sortname), $sorttype);
 		return json_encode($this->view);
 	}
 }
