@@ -93,7 +93,7 @@ class ChartQuery {
 			}
 			$this->view['page'] = 1;
 			$this->view['rows'] = array('id' => '1', 
-										'cell' => array($e.message())
+										'cell' => array($e.getMessage())
 										);
 			$this->view['total'] = 1;
 		}

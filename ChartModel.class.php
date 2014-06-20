@@ -1,4 +1,16 @@
 <?php
+class SortException {
+	// Redefine the exception so message isn't optional
+	public function __construct($message, $code = 0, Exception $previous = null) {
+		parent::__construct($message, $code, $previous);
+	}
+
+	public function __toString() {
+		return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
+	}
+
+}
+
 class ChartModel {
 	private $data = array();
 	private $columns = array();
@@ -39,8 +51,8 @@ class ChartModel {
 	}
 
 	function column($str){
-		if (!array_key_exists($this->columns, $str)){
-			throw new Exception('column to sort by does not exist');
+		if (!array_key_exists($str, $this->columns)){
+			throw new SortException('column to sort by does not exist');
 			return false;
 		}
 		return $this->columns[$str];
