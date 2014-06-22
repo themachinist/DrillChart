@@ -27,6 +27,7 @@ class ChartQuery {
 		$this->searchTerm = $query;
 		$this->searchColumn = $qtype; 
 		$this->view['rows'] = $this->model->rows;
+		$this->view['total'] = count($this->view['rows']);
 		return $this;
 	}
 
@@ -39,7 +40,7 @@ class ChartQuery {
 					return false;
 				}
 			});
-
+			$this->view['total'] = count($this->view['rows']);
 		}
 		return $this;
 	}
@@ -73,7 +74,6 @@ class ChartQuery {
 		$end = $start + $rpp;
 		$this->view['page'] = $pn;
 		$this->view['rows'] = array_slice($this->view['rows'], $start, $end);
-		$this->view['total'] = count($this->view['rows']);
 		return $this;
 	}
 
