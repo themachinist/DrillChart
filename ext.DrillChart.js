@@ -2,6 +2,7 @@ mw.loader.using( 'jquery', function(){
 	console.log('jquery ready');
 	mw.loader.using( 'flexigrid', function(){
 		console.log('flexigrid ready');
+		console.log($.flexigrid);
 		$('.flexigrid').flexigrid({
 			url: 'extensions/DrillChart/ChartQuery.php',
 			dataType: 'json',
@@ -38,6 +39,7 @@ mw.loader.using( 'jquery', function(){
 			height: 400
 		});
 		console.log('after flexigrid call');
+		console.log($.flexigrid);
 	});
 });
 
