@@ -40,6 +40,7 @@ mw.loader.using( 'jquery', function(){
 					width: 700,
 					height: 400
 				});
+				clear(testFunctionExists);
 			}
 		}, 100);
 	});
