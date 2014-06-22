@@ -1,52 +1,61 @@
 <?php
 require('ChartModel.class.php');
 
+/**
+ * ChartQuery
+ *
+ * I've implemented a sort-of-fluent interface by returning 
+ * $this at the end of each function call.
+ * 
+ * In addition, I avoided using accessor or mutator methods.
+ * All methods apart from the constructor and process() modify
+ * the view data and will return an exception in the case of 
+ * a fatal error. 
+ */
 class ChartQuery {
 	private $model;
 	private $view = array();
 	private $previous = array();
 
-	/**
-	 * 
-	 */
 	function __construct($page, $rp, $sortname, $sorttype, $qtype, $query){
 		$this->model = new ChartModel('TapDrill_Chart.csv');
 		$this->pageNumber = $page;
 		$this->rowsPerPage = $rp;
-		$this->sortByColumn = $sortname;
+		$this->columnToSortBy['name'] = $sortname;
+		$this->columnToSortBy['number'] = $this->model->column($this->columnToSortBy['name']);
 		$this->sortDirection = $sorttype;
-		$this->query = $query;
-		$this->queryType = $qtype; 
-		// fluent-ish interface $which->is()->really('cool');
+		$this->searchTerm = $query;
+		$this->searchColumn = $qtype; 
+		$this->view['rows'] = $this->model->rows;
 		return $this;
 	}
 
-	function search($term){
-		$this->view['rows'] = array_search($term, $this->view['rows']);
+	function search($term, $column){
+		if (!empty($term)){
+			$this->view['rows'] = array_filter($this->view['rows'], function($array) use ($term, $column){
+				if (strpos($array['cell'][$column], $term) !== false) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+
+		}
 		return $this;
 	}
 
 	function sortBy($column, $dir){
-		$data = $this->view['rows'];
-		// correct value for array_multisort
-		if ($dir){
-			$dir = SORT_ASC;
-		} else {
-			$dir = SORT_DESC;
-		}
-
-		// build array of columns for array_multisort
-		foreach ($data as $key => $row) {
-			foreach ($row as $name){
-				$$name[$key] = $row[$name];
+		// using natural comparison to sort by the column specified by the user
+		uasort($this->view['rows'], function($a, $b) use ($dir) {
+			$comp = strnatcmp($a['cell'][$this->columnToSortBy['number']], 
+							  $b['cell'][$this->columnToSortBy['number']]);
+			// kind of considered using a ternary - couldn't tell if it less more readable
+			if ($dir == 'asc'){
+				return $comp;
+			} else {
+				return $comp * -1;
 			}
-		}
-
-		// sort by column (hopefully)
-		array_multisort($$column, $dir, $data);
-
-		// replace row data
-		$this->view['rows'] = $data;
+		});
 
 		return $this;
 	}
@@ -63,11 +72,15 @@ class ChartQuery {
 		$start = (($pn - 1) * $rpp);
 		$end = $start + $rpp;
 		$this->view['page'] = $pn;
-		$this->view['rows'] = array_slice($this->model->rows, $start, $end);
+		$this->view['rows'] = array_slice($this->view['rows'], $start, $end);
 		$this->view['total'] = count($this->view['rows']);
 		return $this;
 	}
 
+	/**
+	 * I implemented this method but ended up not using it.
+	 * But I haven't decided if I should remove it or not.
+	 */
 	function viewAll(){
 		$this->view['page'] = $pn;
 		$this->view['rows'] = array_slice($this->model->rows, $start, $end);
@@ -79,27 +92,24 @@ class ChartQuery {
 	 * Main entry point for the class
 	 */
 	function process(){
-		switch($this->queryType){
-			case 'json':
-				viewPage($this->pageNumber, $this->rowsPerPage)->sortBy($this->model->column($sortname), $sorttype);
-				break;
-		}
 		try {
-			$this->viewPage($this->pageNumber, $this->rowsPerPage)
-				->sortBy($this->model->column($sortname), $sorttype);
+			$this->search(	$this->searchTerm, 						
+							$this->model->column($this->searchColumn))
+				 ->viewPage($this->pageNumber, 
+				 			$this->rowsPerPage)
+				 ->sortBy(	$this->model->column($this->columnToSortBy['name']), 
+				 			$this->sortDirection);
 		} catch (Exception $e) {
-			if ($e instanceof SortException) {
-				return;
+			if ($e instanceof ColumnException) {
+				$this->viewPage($this->pageNumber, $this->rowsPerPage);
+				return json_encode($this->view);
 			}
 			$this->view['page'] = 1;
 			$this->view['rows'] = array('id' => '1', 
-										'cell' => array($e.getMessage())
+										'cell' => array($e->getMessage())
 										);
 			$this->view['total'] = 1;
 		}
-		print("<pre>");
-		var_dump($this->view);
-		print("</pre>");
 		return json_encode($this->view);
 	}
 }

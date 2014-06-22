@@ -1,5 +1,5 @@
 <?php
-class SortException extends Exception {
+class ColumnNotExistException extends Exception {
 	// Redefine the exception so message isn't optional
 	public function __construct($message, $code = 0, Exception $previous = null) {
 		parent::__construct($message, $code, $previous);
@@ -12,8 +12,8 @@ class SortException extends Exception {
 }
 
 class ChartModel {
-	private $data = array();
-	private $columns = array();
+	public $rows = array();
+	public $columns = array();
 
 	function __construct($file){
 		// not sure if i like this - president not sure
@@ -46,13 +46,24 @@ class ChartModel {
 			);
 			$id++;
 		}
-		$this->columns = $this->rows[0]['cell'];
+
+		// can't use anonymous function with array_combine
+		// becuase it expects an array as input
+		// might be able to use array_walk
+		function buildArrayOfIntegers($arr){
+			$arrizzle = array();
+			for ($i = 0; $i < count($arr); $i++){
+				$arrizzle[] = $i;
+			}
+			return $arrizzle;
+		}
+		$this->columns = array_combine($this->rows[0]['cell'], buildArrayOfIntegers($this->rows[0]['cell']));
 		unset($this->rows[0]);
 	}
 
 	function column($str){
 		if (!array_key_exists($str, $this->columns)){
-			throw new SortException('column to sort by does not exist');
+			throw new ColumnNotExistException("$str not found");
 			return false;
 		}
 		return $this->columns[$str];
