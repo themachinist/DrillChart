@@ -3,7 +3,7 @@ mw.loader.using( 'jquery', function(){
 	mw.loader.using( 'flexigrid', function(){
 		console.log('flexigrid ready');
 		$('.flexigrid').flexigrid({
-			url: 'extensions/DrillChart/DrillChart.php?data=1',
+			url: 'extensions/DrillChart/ChartQuery.php',
 			dataType: 'json',
 			procmsg: 'Processing, Please wait ...',
 			onSuccess:function(){

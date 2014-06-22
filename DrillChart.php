@@ -1,56 +1,10 @@
 <?php
 /**
-* DrillChart.php -- Use a DrillChart-based interface to start new articles
-* Copyright 2007 Vinismo, Inc. (http://vinismo.com/)
-*
-*  This program is free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 2 of the License, or
-*  (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  You should have received a copy of the GNU General Public License
-*  along with this program; if not, write to the Free Software
-*  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-USA
-*
+* DrillChart.php
 * @file
 * @ingroup Extensions
-* @author Evan Prodromou <evan@vinismo.com>
+* @author David Winslow <the@machini.st>
 */
-
-/** I know that I am not supposed to do any of the crap that follows this comment
- * but I really don't care about this non-production extension adhering to MW standards
- * Can't really see an ROI for doing it that way.
- * and phew i just turned this really dirty. evander holyfield
- */
-
-function trimlastchar($s){
-	return substr($s, 0, -1);
-}
-
-/*if ($_GET['data']) {
-	$str = "";
-	$csv = file_get_contents('TapDrill_Chart.csv');
-	$lines = explode("\n",$csv);
-	$id = 1;
-	foreach ($lines as $ln){
-		$fields = explode(',', $ln);
-		$ln = "";
-		foreach ($fields as $field){
-			$ln .= "\"$field\",";
-		}
-		$str = $str . "{\"id\": \"$id\",";
-		$str = $str . "\"cell\":[" . trimlastchar($ln) . "]},\n";
-		$id++;
-	}	
-	header('Content-type: application/json');	
-	print "{\"rows\": [" . trimlastchar(trimlastchar($str)) . "]}";
-	exit(1);
-}*/
 
 # credits
 $wgExtensionCredits['DrillChart'][] = array(
