@@ -33,7 +33,6 @@ mw.loader.using( 'jquery', function(){
 					sortname: "imperial",
 					sortorder: "asc",
 					usepager: true,
-					title: 'Drill and Tap-Drill Sizes',
 					useRp: true,
 					rp: 15,
 					showTableToggleBtn: true,
