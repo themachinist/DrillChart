@@ -57,7 +57,6 @@ class ChartQuery {
 				return $comp * -1;
 			}
 		});
-		echo 'hi';
 		// it doesn't feel like great form to do this
 		// maybe i can figure out how to work this into sort function
 		$i = 1;
