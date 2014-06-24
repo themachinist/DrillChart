@@ -57,6 +57,7 @@ class ChartQuery {
 				return $comp * -1;
 			}
 		});
+<<<<<<< HEAD
 		// it doesn't feel like great form to do this
 		// maybe i can figure out how to work this into sort function
 		$i = 1;
@@ -65,6 +66,9 @@ class ChartQuery {
 			$i++;
 		}
 		return $this;
+=======
+		
+>>>>>>> 6b25a990df2bf432b7a6394a988d63095c0f0823
 	}
 
 	function revert(){
