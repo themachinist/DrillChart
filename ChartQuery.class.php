@@ -57,8 +57,16 @@ class ChartQuery {
 				return $comp * -1;
 			}
 		});
-
+		$this->renumberRows();
 		return $this;
+	}
+
+	private function renumberRows(){
+		$i = 1;
+		foreach ($this->view['rows'] as $num => $row){
+			$this->view['rows'][$num]['id'] = $i;
+			$i++;
+		}
 	}
 
 	function revert(){
