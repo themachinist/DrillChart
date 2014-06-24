@@ -57,16 +57,14 @@ class ChartQuery {
 				return $comp * -1;
 			}
 		});
-		$this->renumberRows();
-		return $this;
-	}
-
-	private function renumberRows(){
+		// it doesn't feel like great form to do this
+		// maybe i can figure out how to work this into sort function
 		$i = 1;
-		foreach ($this->view['rows'] as $num => $row){
-			$this->view['rows'][$num]['id'] = $i;
+		foreach ($this->view['rows'] as $row){
+			$row['id'] = $i;
 			$i++;
 		}
+		return $this;
 	}
 
 	function revert(){
