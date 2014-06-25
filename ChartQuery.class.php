@@ -47,26 +47,21 @@ class ChartQuery {
 
 	function sortBy($column, $dir){
 		// using natural comparison to sort by the column specified by the user
+		#echo 'column to sort by: ' . $this->columnToSortBy['number'] . ' : ' . $this->columnToSortBy['name'];
 		uasort($this->view['rows'], function($a, $b) use ($dir) {
-			$comp = strnatcmp($a['cell'][$this->columnToSortBy['number']], 
+			#echo "<br />" . $a['cell'][$this->columnToSortBy['number']] . " vs " . $b['cell'][$this->columnToSortBy['number']];
+			$comp = strcmp($a['cell'][$this->columnToSortBy['number']], 
 							  $b['cell'][$this->columnToSortBy['number']]);
 			// kind of considered using a ternary - couldn't tell if it less more readable
+			#echo " = " . $comp;
 			if ($dir == 'asc'){
 				return $comp;
 			} else {
 				return $comp * -1;
 			}
 		});
-		$this->renumberRows();
+		$this->view['rows'] = array_values($this->view['rows']);
 		return $this;
-	}
-
-	private function renumberRows(){
-		$i = 1;
-		foreach ($this->view['rows'] as $num => $row){
-			$this->view['rows'][$num]['id'] = $i;
-			$i++;
-		}
 	}
 
 	function revert(){
