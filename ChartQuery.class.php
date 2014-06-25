@@ -1,17 +1,6 @@
 <?php
 require('ChartModel.class.php');
 
-/**
- * ChartQuery
- *
- * I've implemented a sort-of-fluent interface by returning 
- * $this at the end of each function call.
- * 
- * In addition, I avoided using accessor or mutator methods.
- * All methods apart from the constructor and process() modify
- * the view data and will return an exception in the case of 
- * a fatal error. 
- */
 class ChartQuery {
 	private $model;
 	private $view = array();
@@ -46,14 +35,9 @@ class ChartQuery {
 	}
 
 	function sortBy($column, $dir){
-		// using natural comparison to sort by the column specified by the user
-		#echo 'column to sort by: ' . $this->columnToSortBy['number'] . ' : ' . $this->columnToSortBy['name'];
 		uasort($this->view['rows'], function($a, $b) use ($dir) {
-			#echo "<br />" . $a['cell'][$this->columnToSortBy['number']] . " vs " . $b['cell'][$this->columnToSortBy['number']];
 			$comp = strcmp($a['cell'][$this->columnToSortBy['number']], 
 							  $b['cell'][$this->columnToSortBy['number']]);
-			// kind of considered using a ternary - couldn't tell if it less more readable
-			#echo " = " . $comp;
 			if ($dir == 'asc'){
 				return $comp;
 			} else {
@@ -80,28 +64,18 @@ class ChartQuery {
 		return $this;
 	}
 
-	/**
-	 * I implemented this method but ended up not using it.
-	 * But I haven't decided if I should remove it or not.
-	 */
-	function viewAll(){
-		$this->view['page'] = $pn;
-		$this->view['rows'] = array_slice($this->model->rows, $start, $end);
-		$this->view['total'] = count($this->view['rows']);
-		return $this;
-	}
-
-	/**
-	 * Main entry point for the class
-	 */
 	function process(){
 		try {
+
 			$this->search(	$this->searchTerm, 						
 							$this->model->column($this->searchColumn))
+
 				 ->viewPage($this->pageNumber, 
 				 			$this->rowsPerPage)
+
 				 ->sortBy(	$this->model->column($this->columnToSortBy['name']), 
 				 			$this->sortDirection);
+
 		} catch (Exception $e) {
 			if ($e instanceof ColumnException) {
 				$this->viewPage($this->pageNumber, $this->rowsPerPage);

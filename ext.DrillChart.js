@@ -1,10 +1,7 @@
 mw.loader.using( 'jquery', function(){
-	console.log('jquery ready');
 	mw.loader.using( 'flexigrid', function(){
 		var testFunctionExists = setInterval(function(){
-			console.log('testing for .flexigrid()');
 			if (typeof $('.flexigrid').flexigrid != 'undefined'){
-				console.log('flexigrid exists!');
 				$('.flexigrid').flexigrid({
 					url: 'extensions/DrillChart/ChartQuery.php',
 					dataType: 'json',
@@ -17,25 +14,25 @@ mw.loader.using( 'jquery', function(){
 						console.log(data);
 					},
 					colModel : [
-					{display: 'Imperial', name : 'imperial', width : 80, sortable : true, align: 'right'},
+					{display: 'Decimal', name : 'decimal', width : 80, sortable : true, align: 'right'},
 					{display: 'Wire', name : 'wire', width : 80, sortable : true, align: 'right'},
 					{display: 'Metric', name : 'metric', width : 80, sortable : true, align: 'right'},
 					{display: 'Tap Sizes', name : 'tap', width : 130, sortable : true, align: 'left'},
 					{display: 'STI Sizes', name : 'sti', width : 80, sortable : true, align: 'left'}
 					],
 					searchitems : [
-					{display: 'Imperial', name : 'imperial', isdefault: true},
+					{display: 'Decimal', name : 'decimal', isdefault: true},
 					{display: 'Wire', name : 'wire'},
 					{display: 'Metric', name : 'metric'},
 					{display: 'Tap Sizes', name : 'tap'},
 					{display: 'STI Sizes', name : 'sti'}
 					],
-					sortname: "imperial",
+					sortname: "decimal",
 					sortorder: "asc",
 					usepager: true,
 					useRp: true,
 					rp: 15,
-					showTableToggleBtn: true,
+					showTableToggleBtn: false,
 					width: 700,
 					height: 400
 				});
