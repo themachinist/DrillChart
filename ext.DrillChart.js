@@ -3,7 +3,7 @@ mw.loader.using( 'jquery', function(){
 		var testFunctionExists = setInterval(function(){
 			if (typeof $('.flexigrid').flexigrid != 'undefined'){
 				$('.flexigrid').flexigrid({
-					url: 'extensions/DrillChart/ChartQuery.php',
+					url: '/w/extensions/DrillChart/ChartQuery.php',
 					dataType: 'json',
 					procmsg: 'Processing, Please wait ...',
 					onSuccess:function(){
